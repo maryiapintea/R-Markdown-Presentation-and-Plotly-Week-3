@@ -1,0 +1,56 @@
+---
+title: "Week 3 Project"
+author: "Maria Pintea"
+date: "October 23, 2017"
+output: html_document
+---
+
+Plutchik's Emotions Wheel
+========================================================
+author: Maria Pintea
+date: 23-Oct-2017
+autosize: true
+
+Description
+========================================================
+
+
+- The analysis was done by looking at a single sentence
+- 18 emotions were identified based on Plutchik's wheel of emotions
+- the 18 emotions were graded
+
+Slide With Code
+========================================================
+
+```{r}
+
+library(plotly)
+EmotionsData <- read.csv("A:\\home\\Downloads\\primary-plutchik-wheel-DFE.csv", stringsAsFactors = FALSE)
+f <- list(
+  family = "Courier New, monospace",
+  size = 18,
+  color = "#7f7f7f"
+)
+
+x <- list(
+    title = "Emotion",
+    titlefont = f
+)
+
+y <- list(
+    title = "Trusted Judgements",
+    titlefont = f
+)
+
+```
+
+Emotions Data Plot
+========================================================
+
+
+```{r, echo=FALSE}
+p=plot_ly(EmotionsData, x = ~emotion, y = ~emotion.confidence,
+        mode = 'bar') %>% layout(xaxis = x, yaxis = y)
+htmlwidgets::saveWidget(as_widget(p), file = "demo.html")
+```
+<iframe src="demo.html" style="position:absolute;height:100%;width:100%"></iframe>
